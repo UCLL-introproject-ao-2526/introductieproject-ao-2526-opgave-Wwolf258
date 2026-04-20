@@ -12,4 +12,5 @@ PNG opgelost Paint/Photoshop/MS Designer
 SHA1 Encryptor/decryptor online te vinden
 .class file --> gebruik Intellij
 
+Foto's opzoeken -- > google images
 
