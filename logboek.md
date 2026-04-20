@@ -8,3 +8,8 @@ Feedback gekregen van de docent. Nog steeds niet duidelijk, de voorgestelde oplo
 Eindelijk tijd gevonden om dit vak terug te starten. Github oplossing gevonden via Reddit. 
 Problemen gehad met pytest te gebruiken. Opgelost door research online. 
 
+PNG opgelost Paint/Photoshop/MS Designer
+SHA1 Encryptor/decryptor online te vinden
+.class file --> gebruik Intellij
+
+
