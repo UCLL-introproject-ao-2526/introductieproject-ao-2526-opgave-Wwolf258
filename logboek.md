@@ -14,3 +14,11 @@ SHA1 Encryptor/decryptor online te vinden
 
 Foto's opzoeken -- > google images
 
+## 20 April 2026
+Tutorial (youtube video) doorgenomen van de blackjack oefening. 
+
+## 22 April 2026
+Gestart met het testen van de blackjack oefening. Pygame werkte niet op python 3.14, aanpassingen gezocht en gevonden om te starten met python 3.13.
+
+
+
