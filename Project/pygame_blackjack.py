@@ -31,12 +31,16 @@ outcome = 0
 add_score = False
 results = ['', 'PLAYER BUSTED o_O', 'Player WINS! :)', 'DEALER WINS :(', 'TIE GAME...']
 
+balance = 1000
+current_bet = 0
+betting_active = True
+
 
 # deal cards by selecting randomly from deck, and make function for one card at a time
 def deal_cards(current_hand, current_deck):
-    card = random.randint(0, len(current_deck))
-    current_hand.append(current_deck[card - 1])
-    current_deck.pop(card - 1)
+    card = random.randint(0, len(current_deck) - 1)
+    current_hand.append(current_deck[card])
+    current_deck.pop(card)
     return current_hand, current_deck
 
 
@@ -149,6 +153,13 @@ def check_endgame(hand_act, deal_score, play_score, result, totals, add):
                 totals[2] += 1
             add = False
     return result, totals, add
+
+def draw_balance():
+    balance_text = smaller_font.render(f'Balance: ${balance}', True, 'gold')
+    bet_text = smaller_font.render(f'Bet: ${current_bet}', True, 'gold')
+
+    screen.blit(balance_text, (20, 20))
+    screen.blit(bet_text, (20, 60))
 
 
 # main game loop
