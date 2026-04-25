@@ -154,12 +154,33 @@ def check_endgame(hand_act, deal_score, play_score, result, totals, add):
             add = False
     return result, totals, add
 
+
 def draw_balance():
     balance_text = smaller_font.render(f'Balance: ${balance}', True, 'gold')
     bet_text = smaller_font.render(f'Bet: ${current_bet}', True, 'gold')
 
     screen.blit(balance_text, (20, 20))
     screen.blit(bet_text, (20, 60))
+    
+    def draw_betting_buttons():
+    button_list = []
+
+    bet10 = pygame.draw.rect(screen, 'white', [50, 720, 120, 60], 0, 5)
+    pygame.draw.rect(screen, 'black', [50, 720, 120, 60], 3, 5)
+    screen.blit(smaller_font.render('+10', True, 'black'), (75, 735))
+    button_list.append(bet10)
+
+    bet50 = pygame.draw.rect(screen, 'white', [200, 720, 120, 60], 0, 5)
+    pygame.draw.rect(screen, 'black', [200, 720, 120, 60], 3, 5)
+    screen.blit(smaller_font.render('+50', True, 'black'), (225, 735))
+    button_list.append(bet50)
+
+    deal = pygame.draw.rect(screen, 'green', [380, 720, 170, 60], 0, 5)
+    pygame.draw.rect(screen, 'white', [380, 720, 170, 60], 3, 5)
+    screen.blit(smaller_font.render('DEAL', True, 'white'), (420, 735))
+    button_list.append(deal)
+
+    return button_list
 
 
 # main game loop
@@ -184,6 +205,10 @@ while run:
                 dealer_hand, game_deck = deal_cards(dealer_hand, game_deck)
         draw_scores(player_score, dealer_score)
     buttons = draw_game(active, records, outcome)
+    draw_balance()
+
+        if betting_active:
+            betting_buttons = draw_betting_buttons()
 
     # event handling, if quit pressed, then exit game
     for event in pygame.event.get():
