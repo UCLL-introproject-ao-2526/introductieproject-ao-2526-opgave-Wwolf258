@@ -27,3 +27,16 @@ Variabelen achterliggend toegevoegd. Nog wel niet zichtbaar.
 ## 24 April 2026
 Saldo toekennen bij de start toegevoegd. Opgegeven met verder te werken aangezien het niet zichtbaar is. Er zitten nog fouten in die ik niet snap. 
 
+## 25 April 2026
+Een hele zaterdag hiervoor vrijgemaakt. Minder gedaan dan verwacht. Veel fouten gemaakt bij het opstellen van de def functie voor de betting. 
+Vorige bug was verwerkt van het startsaldo. Maar ondertussen zijn er weer andere bugs ingekomen. 
+
+Niet veel verder geraakt, gestopt om met een fris brein te starten morgen. 
+
+## 26 April 2026
+Bugs opgelost. Reddit en Stackoverflow to the rescue. 
+Betprogramma werkt ondertussen. Ook gebruik gemaakt van een extensie om de code wat te ordenen visueel, maakt het werken sneller voor mezelf.
+
+Volgende problemen wel ontdekt bij het afsluiten: Tekst komt over elkaar van 'Dealer wins' en 'Balance + Bets'. Spel gaat ook niet terug door zoals bij het vorige. Het blokkeert op het einde. 
+Dit kon beter verwerkt worden, al ben ik blij dat het betting systeem lijkt te werken. 
+
