@@ -265,19 +265,18 @@ while run:
         add_score
     )
 
-if outcome != 0 and not betting_active:
+    if outcome != 0 and not betting_active:
 
-    if outcome == 2:
-        balance += current_bet
+        if outcome == 2:
+            balance += current_bet
 
-    elif outcome == 1 or outcome == 3:
-        balance -= current_bet
+        elif outcome == 1 or outcome == 3:
+            balance -= current_bet
 
-    current_bet = 0
-    betting_active = True
-    active = False
+        current_bet = 0
+        betting_active = True
+        active = False
 
-pygame.display.flip()
     pygame.display.flip()
 
 pygame.quit()

@@ -40,3 +40,12 @@ Betprogramma werkt ondertussen. Ook gebruik gemaakt van een extensie om de code 
 Volgende problemen wel ontdekt bij het afsluiten: Tekst komt over elkaar van 'Dealer wins' en 'Balance + Bets'. Spel gaat ook niet terug door zoals bij het vorige. Het blokkeert op het einde. 
 Dit kon beter verwerkt worden, al ben ik blij dat het betting systeem lijkt te werken. 
 
+## 29 April 2026
+Spel gestart om zelf te spelen. Opgemerkt dat er nog meer bugs inzitten dan verwacht. Proberen toevoegen dat het saldo altijd wordt weergegeven. Weer extra bugs gemaakt. 
+Uiteindelijk meer slecht gedaan dan goed vandaag qua aantal bugs. 
+
+## 2 Mei 2026
+Bugfixed, saldo wordt aangepast. Ik wou vandaag nog extra nieuwe items toevoegen maar hier niet toe geraakt. Tijdens het testen weer nieuwe bugs ontdekt. Proberen te gaan zoeken in de cursus programming 1&2, niet gevonden wat ik zocht. 
+
+
+Bugfixes: Bij player busted, nadien niet meer mogelijk om terug te dealen. & Dealer wint altijd, wat niet de bedoeling is. 
