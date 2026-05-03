@@ -49,3 +49,8 @@ Bugfixed, saldo wordt aangepast. Ik wou vandaag nog extra nieuwe items toevoegen
 
 
 Bugfixes: Bij player busted, nadien niet meer mogelijk om terug te dealen. & Dealer wint altijd, wat niet de bedoeling is. 
+
+## 3 Mei 2026
+Persoonlijk zag ik het niet zitten om hier nog aan verder te werken. Meer video's gekeken over bugfixes op youtube dan echt nieuwe dingen toegevoegd. 
+Alles werkt nu wel terug, dus meer gedaan dan initieel gedacht. 
+
