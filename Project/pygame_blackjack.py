@@ -77,12 +77,15 @@ def calculate_score(hand):
 
 
 def draw_scores(player, dealer):
-    screen.blit(font.render(f'Score: {player}', True, 'white'), (330, 400))
-
+    # dealer score
     if reveal_dealer:
-        screen.blit(font.render(f'Score: {dealer}', True, 'white'), (330, 100))
+        dealer_score_text = font.render(f'Score: {dealer}', True, 'white')
+        screen.blit(dealer_score_text, (350, 180))
 
-
+    # player score
+    player_score_text = font.render(f'Score: {player}', True, 'white')
+    screen.blit(player_score_text, (350, 480))
+    
 def draw_cards(player, dealer, reveal):
     for i in range(len(player)):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
@@ -144,7 +147,9 @@ def draw_game():
         button_list.append(stand)
 
     if outcome != 0:
-        screen.blit(font.render(results[outcome], True, 'white'), (120, 25))
+        result_text = font.render(results[outcome], True, 'white')
+        result_rect = result_text.get_rect(center=(WIDTH // 2, 110))
+        screen.blit(result_text, result_rect)
 
         new_hand = pygame.draw.rect(screen, 'white', [150, 720, 300, 80], 0, 5)
         pygame.draw.rect(screen, 'green', [150, 720, 300, 80], 3, 5)

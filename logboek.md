@@ -54,3 +54,6 @@ Bugfixes: Bij player busted, nadien niet meer mogelijk om terug te dealen. & Dea
 Persoonlijk zag ik het niet zitten om hier nog aan verder te werken. Meer video's gekeken over bugfixes op youtube dan echt nieuwe dingen toegevoegd. 
 Alles werkt nu wel terug, dus meer gedaan dan initieel gedacht. 
 
+## 6 Mei 2026 
+Meer focus op layout mooier maken. Tekst die over elkaar staat etc aanpassen. 
+Alle lijnen zijn onder elkaar nu bij het spelen. 
