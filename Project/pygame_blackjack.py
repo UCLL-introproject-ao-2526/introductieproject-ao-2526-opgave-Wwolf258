@@ -34,10 +34,12 @@ reveal_dealer = False
 hand_active = False
 add_score = False
 paid_out = False
+natural_blackjack = False
 
 balance = 1000
 current_bet = 0
 betting_active = True
+game_over = False
 
 dealer_draw_time = 0
 
@@ -77,15 +79,14 @@ def calculate_score(hand):
 
 
 def draw_scores(player, dealer):
-    # dealer score
     if reveal_dealer:
         dealer_score_text = font.render(f'Score: {dealer}', True, 'white')
         screen.blit(dealer_score_text, (350, 180))
 
-    # player score
     player_score_text = font.render(f'Score: {player}', True, 'white')
     screen.blit(player_score_text, (350, 480))
-    
+
+
 def draw_cards(player, dealer, reveal):
     for i in range(len(player)):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
@@ -109,6 +110,10 @@ def draw_cards(player, dealer, reveal):
 def draw_balance():
     screen.blit(smaller_font.render(f'Balance: ${balance}', True, 'gold'), (20, 20))
     screen.blit(smaller_font.render(f'Bet: ${current_bet}', True, 'gold'), (20, 60))
+
+    title_text = smaller_font.render('CASINO BLACKJACK', True, 'gold')
+    title_rect = title_text.get_rect(center=(WIDTH // 2, 125))
+    screen.blit(title_text, title_rect)
 
 
 def draw_betting_buttons():
@@ -135,7 +140,7 @@ def draw_betting_buttons():
 def draw_game():
     button_list = []
 
-    if active and outcome == 0:
+    if active and outcome == 0 and not game_over:
         hit = pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 0, 5)
         pygame.draw.rect(screen, 'green', [0, 700, 300, 100], 3, 5)
         screen.blit(font.render('HIT ME', True, 'black'), (55, 735))
@@ -146,15 +151,25 @@ def draw_game():
         screen.blit(font.render('STAND', True, 'black'), (355, 735))
         button_list.append(stand)
 
-    if outcome != 0:
+    if outcome != 0 and not game_over:
         result_text = font.render(results[outcome], True, 'white')
-        result_rect = result_text.get_rect(center=(WIDTH // 2, 110))
+        result_rect = result_text.get_rect(center=(WIDTH // 2, 155))
         screen.blit(result_text, result_rect)
 
         new_hand = pygame.draw.rect(screen, 'white', [150, 720, 300, 80], 0, 5)
         pygame.draw.rect(screen, 'green', [150, 720, 300, 80], 3, 5)
         screen.blit(font.render('NEW HAND', True, 'black'), (175, 740))
         button_list.append(new_hand)
+
+    if game_over:
+        game_over_text = font.render('GAME OVER', True, 'white')
+        game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, 360))
+        screen.blit(game_over_text, game_over_rect)
+
+        restart = pygame.draw.rect(screen, 'white', [150, 720, 300, 80], 0, 5)
+        pygame.draw.rect(screen, 'green', [150, 720, 300, 80], 3, 5)
+        screen.blit(font.render('RESTART', True, 'black'), (175, 740))
+        button_list.append(restart)
 
     score_text = smaller_font.render(
         f'Wins: {records[0]}   Losses: {records[1]}   Draws: {records[2]}',
@@ -184,7 +199,7 @@ def start_new_round():
     global my_hand, dealer_hand, outcome
     global hand_active, reveal_dealer, add_score
     global dealer_score, player_score, betting_active
-    global paid_out, dealer_draw_time
+    global paid_out, dealer_draw_time, natural_blackjack
 
     active = True
     initial_deal = True
@@ -199,6 +214,7 @@ def start_new_round():
     add_score = True
     betting_active = False
     paid_out = False
+    natural_blackjack = False
 
     dealer_score = 0
     player_score = 0
@@ -209,7 +225,7 @@ run = True
 
 while run:
     timer.tick(fps)
-    screen.fill('black')
+    screen.fill((0, 90, 40))
 
     betting_buttons = []
     buttons = []
@@ -226,6 +242,16 @@ while run:
 
         draw_cards(my_hand, dealer_hand, reveal_dealer)
         draw_scores(player_score, dealer_score)
+
+        if hand_active and len(my_hand) == 2 and player_score == 21:
+            natural_blackjack = True
+            outcome = 2
+            hand_active = False
+            reveal_dealer = True
+
+            if add_score:
+                records[0] += 1
+                add_score = False
 
         if reveal_dealer and outcome == 0:
             now = pygame.time.get_ticks()
@@ -254,18 +280,28 @@ while run:
 
     draw_balance()
 
-    if betting_active and not active:
+    if betting_active and not active and not game_over:
         betting_buttons = draw_betting_buttons()
 
     buttons = draw_game()
 
     if outcome != 0 and not paid_out:
         if outcome == 2:
-            balance += current_bet
+            if natural_blackjack:
+                balance += int(current_bet * 1.5)
+            else:
+                balance += current_bet
+
         elif outcome == 1 or outcome == 3:
             balance -= current_bet
 
         paid_out = True
+
+        if balance <= 0:
+            balance = 0
+            game_over = True
+            active = False
+            betting_active = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -273,7 +309,26 @@ while run:
 
         if event.type == pygame.MOUSEBUTTONUP:
 
-            if betting_active and not active:
+            if game_over:
+                if len(buttons) > 0 and buttons[0].collidepoint(event.pos):
+                    balance = 1000
+                    current_bet = 0
+                    outcome = 0
+                    records = [0, 0, 0]
+
+                    active = False
+                    betting_active = True
+                    game_over = False
+
+                    reveal_dealer = False
+                    hand_active = False
+                    paid_out = False
+                    natural_blackjack = False
+
+                    my_hand = []
+                    dealer_hand = []
+
+            elif betting_active and not active:
                 if betting_buttons[0].collidepoint(event.pos):
                     if balance >= current_bet + 10:
                         current_bet += 10
@@ -304,6 +359,8 @@ while run:
                     outcome = 0
                     reveal_dealer = False
                     hand_active = False
+                    paid_out = False
+                    natural_blackjack = False
                     my_hand = []
                     dealer_hand = []
 

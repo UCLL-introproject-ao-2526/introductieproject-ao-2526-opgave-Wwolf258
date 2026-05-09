@@ -57,3 +57,16 @@ Alles werkt nu wel terug, dus meer gedaan dan initieel gedacht.
 ## 6 Mei 2026 
 Meer focus op layout mooier maken. Tekst die over elkaar staat etc aanpassen. 
 Alle lijnen zijn onder elkaar nu bij het spelen. 
+
+
+## 9 Mei 2026
+We zitten bijna aan de 20 uur tijd dat we hebben voor dit project. Persoonlijk wou ik nog meer implementeren dit weekend om te zien hoe het gaat. 
+Wat ik nog graag zou doen de komende 2 dagen: 
+- Groene achtergrond
+- Casino titel
+- Blackjack bonus (direct 21 van de start)
+- Game over (momenteel als balans 0 bereikt wordt, blokkeert het spel)
+- Nog meer UI verbeteringen (zoals meer inzetknoppen dan alleen +10 en +50)
+
+Uiteindelijk vandaag veel gesukkeld met de tekst (hoogtes/breedtes), zo gelaten aangezien het leesbaar is, nog niet ideaal. 
+4 van de 5 punten verwerkt, meer dan initieel gehoopt. 
