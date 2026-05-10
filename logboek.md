@@ -70,3 +70,10 @@ Wat ik nog graag zou doen de komende 2 dagen:
 
 Uiteindelijk vandaag veel gesukkeld met de tekst (hoogtes/breedtes), zo gelaten aangezien het leesbaar is, nog niet ideaal. 
 4 van de 5 punten verwerkt, meer dan initieel gehoopt. 
+
+## 10 Mei 2026
+UI verbeteren. Meer betknoppen maken. 
+Wat kleine aanpassingen gedaan voor de leesbaarheid van de tekst weer. 
+Nog wat kleine extra's toegevoegd tijdens het verbetern van de UI. Dealer/Player labels. 
+Casino chips gemaakt met rondingen ipv rechthoeken. Ook vond ik het visueler om random de 4 soorten kaarten toe te voegen met hun respectievelijk teken. (--> Hier dacht ik gewoon de tekens toe te voegen, bleek wat moeilijker dan gedacht met de Unicodes, dit wist ik niet op voorhand anders had ik het niet gedaan.)
+ 

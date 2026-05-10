@@ -5,8 +5,9 @@ import pygame
 
 pygame.init()
 
-cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-one_deck = 4 * cards
+ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+suits = ['♥', '♦', '♣', '♠']
+one_deck = [rank + suit for rank in ranks for suit in suits]
 decks = 4
 
 WIDTH = 600
@@ -16,8 +17,8 @@ pygame.display.set_caption('Pygame Blackjack!')
 
 fps = 60
 timer = pygame.time.Clock()
-font = pygame.font.Font('freesansbold.ttf', 44)
-smaller_font = pygame.font.Font('freesansbold.ttf', 36)
+font = pygame.font.SysFont('arial', 44)
+smaller_font = pygame.font.SysFont('arial', 36)
 
 active = False
 records = [0, 0, 0]
@@ -52,6 +53,23 @@ results = [
 ]
 
 
+def get_rank(card):
+    return card[:-1]
+
+
+def get_suit(card):
+    return card[-1]
+
+
+def get_suit_color(card):
+    suit = get_suit(card)
+
+    if suit == '♥' or suit == '♦':
+        return 'red'
+
+    return 'black'
+
+
 def deal_cards(current_hand, current_deck):
     card = random.randint(0, len(current_deck) - 1)
     current_hand.append(current_deck[card])
@@ -61,15 +79,18 @@ def deal_cards(current_hand, current_deck):
 
 def calculate_score(hand):
     hand_score = 0
-    aces_count = hand.count('A')
+    aces_count = 0
 
     for card in hand:
-        if card in ['J', 'Q', 'K']:
+        rank = get_rank(card)
+
+        if rank in ['J', 'Q', 'K']:
             hand_score += 10
-        elif card == 'A':
+        elif rank == 'A':
             hand_score += 11
+            aces_count += 1
         else:
-            hand_score += int(card)
+            hand_score += int(rank)
 
     while hand_score > 21 and aces_count > 0:
         hand_score -= 10
@@ -78,33 +99,68 @@ def calculate_score(hand):
     return hand_score
 
 
+def draw_labels():
+    dealer_label = smaller_font.render('DEALER', True, 'white')
+    player_label = smaller_font.render('PLAYER', True, 'white')
+
+    screen.blit(dealer_label, (70, 130))
+    screen.blit(player_label, (70, 430))
+
+
 def draw_scores(player, dealer):
     if reveal_dealer:
         dealer_score_text = font.render(f'Score: {dealer}', True, 'white')
-        screen.blit(dealer_score_text, (350, 180))
+        screen.blit(dealer_score_text, (350, 205))
 
     player_score_text = font.render(f'Score: {player}', True, 'white')
-    screen.blit(player_score_text, (350, 480))
+    screen.blit(player_score_text, (350, 505))
+
+
+def draw_single_card(card, x, y, border_color):
+    pygame.draw.rect(screen, (30, 30, 30), [x + 6, y + 6, 120, 220], 0, 5)
+    pygame.draw.rect(screen, 'white', [x, y, 120, 220], 0, 5)
+
+    rank = get_rank(card)
+    suit = get_suit(card)
+    card_color = get_suit_color(card)
+
+    screen.blit(font.render(rank, True, card_color), (x + 8, y + 5))
+    screen.blit(smaller_font.render(suit, True, card_color), (x + 10, y + 55))
+
+    screen.blit(smaller_font.render(suit, True, card_color), (x + 78, y + 135))
+    screen.blit(font.render(rank, True, card_color), (x + 72, y + 170))
+
+    pygame.draw.rect(screen, border_color, [x, y, 120, 220], 5, 5)
+
+
+def draw_hidden_card(x, y):
+    pygame.draw.rect(screen, (30, 30, 30), [x + 6, y + 6, 120, 220], 0, 5)
+    pygame.draw.rect(screen, 'white', [x, y, 120, 220], 0, 5)
+
+    pygame.draw.rect(screen, 'blue', [x + 15, y + 15, 90, 190], 0, 5)
+    pygame.draw.rect(screen, 'white', [x + 25, y + 25, 70, 170], 3, 5)
+
+    hidden_text = smaller_font.render('???', True, 'white')
+    hidden_rect = hidden_text.get_rect(center=(x + 60, y + 110))
+    screen.blit(hidden_text, hidden_rect)
+
+    pygame.draw.rect(screen, 'blue', [x, y, 120, 220], 5, 5)
 
 
 def draw_cards(player, dealer, reveal):
     for i in range(len(player)):
-        pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
-        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 465 + 5 * i))
-        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 635 + 5 * i))
-        pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
+        card_x = 70 + (70 * i)
+        card_y = 460 + (5 * i)
+        draw_single_card(player[i], card_x, card_y, 'red')
 
     for i in range(len(dealer)):
-        pygame.draw.rect(screen, 'white', [70 + (70 * i), 160 + (5 * i), 120, 220], 0, 5)
+        card_x = 70 + (70 * i)
+        card_y = 165 + (5 * i)
 
         if i != 0 or reveal:
-            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 335 + 5 * i))
+            draw_single_card(dealer[i], card_x, card_y, 'blue')
         else:
-            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 335 + 5 * i))
-
-        pygame.draw.rect(screen, 'blue', [70 + (70 * i), 160 + (5 * i), 120, 220], 5, 5)
+            draw_hidden_card(card_x, card_y)
 
 
 def draw_balance():
@@ -112,26 +168,43 @@ def draw_balance():
     screen.blit(smaller_font.render(f'Bet: ${current_bet}', True, 'gold'), (20, 60))
 
     title_text = smaller_font.render('CASINO BLACKJACK', True, 'gold')
-    title_rect = title_text.get_rect(center=(WIDTH // 2, 125))
+    title_rect = title_text.get_rect(center=(WIDTH // 2, 105))
     screen.blit(title_text, title_rect)
+
+
+def draw_chip(x, y, amount, color):
+    pygame.draw.circle(screen, color, (x, y), 35)
+    pygame.draw.circle(screen, 'white', (x, y), 35, 4)
+    pygame.draw.circle(screen, 'black', (x, y), 25, 2)
+
+    text = smaller_font.render(amount, True, 'white')
+    text_rect = text.get_rect(center=(x, y))
+    screen.blit(text, text_rect)
+
+    return pygame.Rect(x - 35, y - 35, 70, 70)
 
 
 def draw_betting_buttons():
     button_list = []
 
-    bet10 = pygame.draw.rect(screen, 'white', [50, 720, 120, 60], 0, 5)
-    pygame.draw.rect(screen, 'black', [50, 720, 120, 60], 3, 5)
-    screen.blit(smaller_font.render('+10', True, 'black'), (75, 735))
-    button_list.append(bet10)
+    button_list.append(draw_chip(70, 715, '+10', 'red'))
+    button_list.append(draw_chip(160, 715, '+50', 'blue'))
+    button_list.append(draw_chip(260, 715, '+100', 'purple'))
+    button_list.append(draw_chip(375, 715, '+500', 'black'))
 
-    bet50 = pygame.draw.rect(screen, 'white', [200, 720, 120, 60], 0, 5)
-    pygame.draw.rect(screen, 'black', [200, 720, 120, 60], 3, 5)
-    screen.blit(smaller_font.render('+50', True, 'black'), (225, 735))
-    button_list.append(bet50)
+    clear = pygame.draw.rect(screen, 'white', [30, 770, 150, 55], 0, 5)
+    pygame.draw.rect(screen, 'black', [30, 770, 150, 55], 3, 5)
+    screen.blit(smaller_font.render('CLEAR', True, 'black'), (45, 780))
+    button_list.append(clear)
 
-    deal = pygame.draw.rect(screen, 'green', [380, 720, 170, 60], 0, 5)
-    pygame.draw.rect(screen, 'white', [380, 720, 170, 60], 3, 5)
-    screen.blit(smaller_font.render('DEAL', True, 'white'), (420, 735))
+    all_in = pygame.draw.rect(screen, 'white', [205, 770, 150, 55], 0, 5)
+    pygame.draw.rect(screen, 'black', [205, 770, 150, 55], 3, 5)
+    screen.blit(smaller_font.render('ALL IN', True, 'black'), (215, 780))
+    button_list.append(all_in)
+
+    deal = pygame.draw.rect(screen, 'green', [380, 770, 170, 55], 0, 5)
+    pygame.draw.rect(screen, 'white', [380, 770, 170, 55], 3, 5)
+    screen.blit(smaller_font.render('DEAL', True, 'white'), (420, 780))
     button_list.append(deal)
 
     return button_list
@@ -152,8 +225,11 @@ def draw_game():
         button_list.append(stand)
 
     if outcome != 0 and not game_over:
+        result_box = pygame.draw.rect(screen, 'black', [110, 135, 380, 60], 0, 8)
+        pygame.draw.rect(screen, 'gold', [110, 135, 380, 60], 3, 8)
+
         result_text = font.render(results[outcome], True, 'white')
-        result_rect = result_text.get_rect(center=(WIDTH // 2, 155))
+        result_rect = result_text.get_rect(center=result_box.center)
         screen.blit(result_text, result_rect)
 
         new_hand = pygame.draw.rect(screen, 'white', [150, 720, 300, 80], 0, 5)
@@ -162,8 +238,11 @@ def draw_game():
         button_list.append(new_hand)
 
     if game_over:
+        game_over_box = pygame.draw.rect(screen, 'black', [120, 315, 360, 90], 0, 8)
+        pygame.draw.rect(screen, 'gold', [120, 315, 360, 90], 4, 8)
+
         game_over_text = font.render('GAME OVER', True, 'white')
-        game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, 360))
+        game_over_rect = game_over_text.get_rect(center=game_over_box.center)
         screen.blit(game_over_text, game_over_rect)
 
         restart = pygame.draw.rect(screen, 'white', [150, 720, 300, 80], 0, 5)
@@ -240,6 +319,7 @@ while run:
         player_score = calculate_score(my_hand)
         dealer_score = calculate_score(dealer_hand)
 
+        draw_labels()
         draw_cards(my_hand, dealer_hand, reveal_dealer)
         draw_scores(player_score, dealer_score)
 
@@ -297,11 +377,11 @@ while run:
 
         paid_out = True
 
-        if balance <= 0:
+        if balance <= 0 and outcome != 0:
             balance = 0
             game_over = True
-            active = False
             betting_active = False
+            reveal_dealer = True
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -338,6 +418,20 @@ while run:
                         current_bet += 50
 
                 elif betting_buttons[2].collidepoint(event.pos):
+                    if balance >= current_bet + 100:
+                        current_bet += 100
+
+                elif betting_buttons[3].collidepoint(event.pos):
+                    if balance >= current_bet + 500:
+                        current_bet += 500
+
+                elif betting_buttons[4].collidepoint(event.pos):
+                    current_bet = 0
+
+                elif betting_buttons[5].collidepoint(event.pos):
+                    current_bet = balance
+
+                elif betting_buttons[6].collidepoint(event.pos):
                     if current_bet > 0:
                         start_new_round()
 
