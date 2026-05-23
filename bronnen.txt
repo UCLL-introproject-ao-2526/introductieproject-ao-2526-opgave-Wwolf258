@@ -1,0 +1,33 @@
+Reflectie bij video
+https://www.youtube.com/watch?v=hG9SzQxaCm8
+
+De video gaat over hoe 'spring' mechanics in videogames ontworpen kunnen worden met behulp van wiskunde en fysica in plaats van trial-and-error. 
+De spreker, Kyle Pittman, legt uit dat veel developers beginnen met willekeurige waardes voor zwaartekracht en jumpsnelheid en daarna blijven tweaken tot het “goed voelt”. 
+Volgens hem zorgt dat vaak voor problemen later in de ontwikkeling, bijvoorbeeld wanneer een personage plots niet meer hoog genoeg kan springen om een platform te bereiken.
+
+Hij toont hoe een sprong mathematisch beschreven kan worden als een parabool. 
+Vanuit gewenste gameplay-eigenschappen zoals springhoogte, springafstand en snelheid van de speler kunnen de nodige waarden voor zwaartekracht en beginsnelheid berekend worden. 
+Hierdoor krijgt een developer veel meer controle over de beweging van het personage.
+
+Een belangrijk punt is dat videogames niet volledig realistisch hoeven te zijn. 
+De spreker gebruikt Super Mario Bros als voorbeeld waarbij Mario sneller naar beneden valt zodra hij het hoogste punt van zijn sprong bereikt. 
+Dit is niet realistisch volgens echte fysica, maar het geeft de sprong een beter “gevoel” voor de speler.
+
+Daarnaast bespreekt hij variable sprong, waarbij een speler hoger springt door de knop langer ingedrukt te houden. 
+Dit wordt technisch bereikt door tijdens bepaalde delen van de sprong andere zwaartekrachtwaardes toe te passen. 
+Ook double jumps en andere complexe bewegingen kunnen opgedeeld worden in meerdere parabolen.
+
+Verder legt hij uit dat horizontale en verticale beweging apart behandeld moeten worden. 
+Wanneer een speler springt, mag de horizontale snelheid niet verdwijnen. Anders zou een personage onnatuurlijk aanvoelen tijdens het bewegen.
+
+Tot slot bespreekt hij verschillende manieren om bewegingen in code te berekenen, zoals "Euler integration" en "velocity verlet integration". 
+Volgens hem is "velocity verlet" nauwkeuriger en stabieler voor projectile motion in games.
+
+Persoonlijk vond ik de presentatie interessanter dan ik eerst verwachtte. 
+Ik heb zelf nog weinig ervaring met game development, maar ik vond het boeiend hoe wiskunde en fysica gebruikt worden om een game beter te laten aanvoelen voor de speler. 
+Vooral het idee dat games niet volledig realistisch moeten zijn, maar vooral leuk en natuurlijk moeten aanvoelen, vond ik interessant. 
+De formules en berekeningen waren beter te volgen dan ik had verwacht en hielpen om de uitleg duidelijker te maken. 
+De spreker presenteerde rustig en gestructureerd en gebruikte goede voorbeelden, zoals Mario, om technische concepten begrijpelijker te maken.
+
+Conclusie: De presentatie toont duidelijk hoe wiskunde gebruikt wordt om betere spring technieken te ontwerpen. 
+Dankzij de voorbeelden en duidelijke uitleg waren zelfs de meer technische delen goed te volgen.
