@@ -1,1 +1,22 @@
-Mail op einde schrijven 
+Hallo Daan,
+
+Ik ben een student uit het introductieproject en ik wou graag wat feedback geven over mijn ervaring met het vak en de opdrachten.
+
+In het algemeen vond ik het introductieproject interessant en leerrijk. Ik vond het positief dat we al snel zelfstandig moesten werken met tools zoals GitHub, Visual Studio Code en Python. Daardoor kreeg ik het gevoel dat we echt bezig waren met praktische vaardigheden die relevant zijn binnen IT. 
+Ook de afwisseling tussen theorie, challenges en praktische opdrachten vond ik goed. Het project motiveerde mij om zelf oplossingen op te zoeken en nieuwe zaken uit te testen.
+
+Daarnaast vond ik het handig dat veel opdrachten stapsgewijs opgebouwd waren. Hierdoor bleef het overzichtelijk en kon ik meestal begrijpen wat de bedoeling was, zelfs wanneer ik nog niet veel voorkennis had. 
+De uitleg op de website was over het algemeen duidelijk en professioneel opgesteld.
+
+Sommige opdrachten vond ik wel moeilijk om me voor te motiveren, vooral wanneer het niet altijd duidelijk was waarom bepaalde concepten belangrijk zijn binnen de praktijk. Bijvoorbeeld opdrachten rond het aanpassen van de afbeeldingen. Misschien zou het helpen om bij sommige challenges meer voorbeelden te geven van hoe zulke technieken later gebruikt worden binnen echte softwareprojecten en/of toepassingen.
+
+Daarnaast merkte ik dat het introductieproject soms veel verschillende onderwerpen snel na elkaar behandelt. Daardoor kan het voor studenten zonder programmeerervaring af en toe overweldigend aanvoelen. 
+Misschien zou het nuttig zijn om op bepaalde momenten iets meer samenvattingen of korte overzichtspagina’s te voorzien.
+
+Ik vond de algemene aanpak van het vak wel sterk omdat het studenten stimuleert om zelfstandig problemen op te lossen in plaats van enkel stappen letterlijk te volgen. Dat lijkt mij een goede voorbereiding op hoe IT in de praktijk werkt.
+
+Bedankt voor het maken en uitwerken van het introductieproject. Ondanks sommige moeilijke momenten vond ik het een interessante en nuttige kennismaking met verschillende aspecten van IT.
+
+Met vriendelijke groeten
+
+Wolfgang
