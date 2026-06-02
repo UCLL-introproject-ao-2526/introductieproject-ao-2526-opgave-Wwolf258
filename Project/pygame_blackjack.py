@@ -55,8 +55,7 @@ results = [
 
 def get_rank(card):
     return card[:-1]
-
-
+# [dn] waarom niet gewoon card[0] en card[1]?
 def get_suit(card):
     return card[-1]
 
@@ -64,6 +63,8 @@ def get_suit(card):
 def get_suit_color(card):
     suit = get_suit(card)
 
+    # [dn] de symbolen gebruiken is leuk, maar hier zie je meteen het probleem: je moet ze ook kunnen typen (sneller als copy pasten)
+    # een sneller alternatief is letters: ['c', 's', 'h', 'd']
     if suit == '♥' or suit == '♦':
         return 'red'
 
@@ -94,7 +95,7 @@ def calculate_score(hand):
 
     while hand_score > 21 and aces_count > 0:
         hand_score -= 10
-        aces_count -= 1
+        aces_count -= 1 # [dn] waarom? aces_count is nergens gebruikt
 
     return hand_score
 
@@ -187,6 +188,8 @@ def draw_chip(x, y, amount, color):
 def draw_betting_buttons():
     button_list = []
 
+    # [dn] als je vaak dezelfde waardes ziet (vooral 715, maar ook 770, 30, 55), steek ze in een variabele
+    # dan hebben ze een naam en kan je ze op 1 plaats aanpassen
     button_list.append(draw_chip(70, 715, '+10', 'red'))
     button_list.append(draw_chip(160, 715, '+50', 'blue'))
     button_list.append(draw_chip(260, 715, '+100', 'purple'))
@@ -225,6 +228,8 @@ def draw_game():
         button_list.append(stand)
 
     if outcome != 0 and not game_over:
+        # [dn] zelfde opmerking met je kleuren: je kan highlight = 'gold' gebruiken
+        # als je de kleur dan ooit wilt aanpassen 
         result_box = pygame.draw.rect(screen, 'black', [110, 135, 380, 60], 0, 8)
         pygame.draw.rect(screen, 'gold', [110, 135, 380, 60], 3, 8)
 
@@ -274,6 +279,9 @@ def determine_outcome(player, dealer):
 
 
 def start_new_round():
+    # [dn] hier zie je al meteen dat het wel heel veel variabelen zijn die je gaat gebruiken
+    # later in de methode zijn er ook veel geneste blokken (if/else/while's)
+    # de beste manier om dit overzichtelijk te houden 
     global active, initial_deal, game_deck
     global my_hand, dealer_hand, outcome
     global hand_active, reveal_dealer, add_score
@@ -390,8 +398,10 @@ while run:
         if event.type == pygame.MOUSEBUTTONUP:
 
             if game_over:
+                # [dn] hier kan je wat indentatie sparen door game_over ook in de if hieronder te steken
                 if len(buttons) > 0 and buttons[0].collidepoint(event.pos):
-                    balance = 1000
+                    # [dn] ook al gebruik je het maar 1 keer, het zou properder zijn als je dit bovenaan definieert 
+                    balance = 1000 
                     current_bet = 0
                     outcome = 0
                     records = [0, 0, 0]
@@ -409,6 +419,9 @@ while run:
                     dealer_hand = []
 
             elif betting_active and not active:
+                # [dn] deze blok kan wat properder door te loopen over de buttons
+                # de actie (de code in de (if collidepoint) kan een array wan lamda's zijn,
+                # of je maakt een struct (button, lambda)
                 if betting_buttons[0].collidepoint(event.pos):
                     if balance >= current_bet + 10:
                         current_bet += 10
