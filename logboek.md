@@ -77,3 +77,30 @@ Wat kleine aanpassingen gedaan voor de leesbaarheid van de tekst weer.
 Nog wat kleine extra's toegevoegd tijdens het verbetern van de UI. Dealer/Player labels. 
 Casino chips gemaakt met rondingen ipv rechthoeken. Ook vond ik het visueler om random de 4 soorten kaarten toe te voegen met hun respectievelijk teken. (--> Hier dacht ik gewoon de tekens toe te voegen, bleek wat moeilijker dan gedacht met de Unicodes, dit wist ik niet op voorhand anders had ik het niet gedaan.)
  
+## 10/06/2026
+Opmerking 1: Card [-1] en niet Card [0] of [1]
+--> Niet akkoord. Volgens mij bij kaart met nummer 10, werkt alleen maar met -1 . Een card[0] bij een 10 geeft enkel 1 terug. 
+
+Opmerking 2: Gebruik van symbolen. 
+--> h, d, c, s zijn inderdaad eenvoudiger. Maar ik vond het gewoon visueel mooier voor een spel.
+
+Opmerking 3: aces_count niet gebruikt?
+--> Ik had dit gedaan voor de oneindige loop te vermijden waar ik inzat. Is nodig voor de aantal azen te tellen die omgezet worden van 11 naar 1?
+
+Opmerking 4: Variablen gebruiken voor getallen
+--> Terechte opmerking. 
+
+Opmerking 5: Variabelen gebruiken voor kleuren
+--> Terechte opmerking. (Uit het ook verloren door de vele aanpassingen dat dit vaak terugkomt.)
+
+Opmerking 6: Plaats uitsparen, indentie. 
+--> Terechte opmerking. Maar met mijn kennis destijds zag ik niet 100% hoe het anders kon. 
+
+Opmerking 7: balance 1000 bovenaan
+--> Terechte opmerking. Properder werken in de toekomst. 
+
+Opmerking 8: Loopen over de buttons. 
+--> Terechte opmerking. Voor mijn eigen gebruiksgemak gebruik ik liever if/else maar kan rommeliger zijn. 
+
+--> Globaal gezien ben ik het eens met de opmerkingen. Deze zijn vaak terecht. Het belang voor mezelf is nu om na te kijken wanneer mijn code geschreven is. 
+Te kijken of er nog vereenvoudigingen mogelijk zijn, 'basis'-waarden die telkens terugkomen steeds apart te definieren. 
